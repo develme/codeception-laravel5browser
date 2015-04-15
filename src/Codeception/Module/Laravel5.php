@@ -3,7 +3,7 @@ namespace Codeception\Module;
 
 use Codeception\Exception\ModuleConfig;
 use Codeception\Lib\Connector\Laravel5 as LaravelConnector;
-use Codeception\Lib\Framework;
+use Codeception\Module\PhpBroswer;
 use Codeception\Lib\Interfaces\ActiveRecord;
 use Codeception\Subscriber\ErrorHandler;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -38,7 +38,7 @@ use Illuminate\Http\Request;
  * * client - `BrowserKit` client
  *
  */
-class Laravel5 extends Framework implements ActiveRecord
+class Laravel5 extends PhpBrowser implements ActiveRecord
 {
 
     /**
@@ -47,18 +47,13 @@ class Laravel5 extends Framework implements ActiveRecord
     public $app;
 
     /**
-     * @var array
-     */
-    protected $config = [];
-
-    /**
      * Constructor.
      *
      * @param $config
      */
-    public function __construct($config = null)
+    public function _setConfig($config = null)
     {
-        $this->config = array_merge(
+        $_config = array_merge(
             array(
                 'cleanup' => true,
                 'environment_file' => '.env',
@@ -69,7 +64,7 @@ class Laravel5 extends Framework implements ActiveRecord
             (array) $config
         );
 
-        parent::__construct();
+        parent::_setConfig($_config);
     }
 
     /**
@@ -79,6 +74,11 @@ class Laravel5 extends Framework implements ActiveRecord
     {
         $this->revertErrorHandler();
         $this->initializeLaravel();
+
+        // Fix up PhpBrowser requirements before we initialize it
+        $this->config['url'] = $this->app['config']->get('app.url');
+
+        parent::_initialize();
     }
 
     /**
@@ -94,6 +94,8 @@ class Laravel5 extends Framework implements ActiveRecord
         if ($this->app['db'] && $this->config['cleanup']) {
             $this->app['db']->beginTransaction();
         }
+
+        parent::_before($test);
     }
 
     /**
@@ -123,6 +125,8 @@ class Laravel5 extends Framework implements ActiveRecord
         if ($this->app['db']) {
             $this->app['db']->disconnect();
         }
+
+        parent::_after($test);
     }
 
     /**
