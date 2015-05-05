@@ -1,9 +1,12 @@
 {
-    "name": "Verron/codeception-laravel5browser",
+    "name": "develme/codeception-laravel5browser",
     "description": "Laravel5Browser module for Codeception. Extends PhpBrowser",
     "keywords": ["Codeception", "Laravel", "Laravel5", "Laravel5Browser"],
     "license": "MIT",
     "authors": [
+        {
+            "name": "DevelMe LLC",
+            "email": "support@develme.com"
         {
             "name": "Jan-Henk Gerritsen",
             "email": "j.h.gerritsen@movage.nl"
