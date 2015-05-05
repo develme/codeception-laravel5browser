@@ -1,5 +1,6 @@
 <?php
 namespace Codeception\Lib\Connector;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Request as DomRequest;
@@ -7,7 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\TerminableInterface;
-class Laravel5 extends Client implements HttpKernelInterface, TerminableInterface
+
+class Laravel5Browser extends Client implements HttpKernelInterface, TerminableInterface
 {
     /**
      * @var Application

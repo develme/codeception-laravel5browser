@@ -2,7 +2,7 @@
 namespace Codeception\Module;
 
 use Codeception\Exception\ModuleConfig;
-use Codeception\Lib\Connector\Laravel5 as LaravelConnector;
+use Codeception\Lib\Connector\Laravel5Browser as LaravelConnector;
 use Codeception\Module\PhpBroswer;
 use Codeception\Lib\Interfaces\ActiveRecord;
 use Codeception\Subscriber\ErrorHandler;
@@ -38,7 +38,7 @@ use Illuminate\Http\Request;
  * * client - `BrowserKit` client
  *
  */
-class Laravel5 extends PhpBrowser implements ActiveRecord
+class Laravel5Browser extends PhpBrowser implements ActiveRecord
 {
 
     /**
